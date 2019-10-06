@@ -63,11 +63,11 @@ public class Fragment_prashnauttaras extends Fragment {
 
         list_data_articles=new ArrayList<>();
 
-        fetcharticles fa=new fetcharticles();
+        fetchprashnauttaras fa=new fetchprashnauttaras();
         new Thread(fa).start();
         return view;
     }
-    class fetcharticles implements Runnable{
+    class fetchprashnauttaras implements Runnable{
         @Override
         public void run() {
             StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

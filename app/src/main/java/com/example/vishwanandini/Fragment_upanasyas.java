@@ -64,14 +64,14 @@ public class Fragment_upanasyas extends Fragment {
 
         list_data_articles=new ArrayList<>();
 
-        fetcharticles fa=new fetcharticles();
+        fetchupanasyas fa=new fetchupanasyas();
         new Thread(fa).start();
 
 
         return view;
     }
 
-    class fetcharticles implements Runnable{
+    class fetchupanasyas implements Runnable{
         @Override
         public void run() {
             StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
