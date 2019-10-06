@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="description will show here"
                 android:padding="5dp"
+                android:gravity="center_horizontal"
                 android:textColor="#000000"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

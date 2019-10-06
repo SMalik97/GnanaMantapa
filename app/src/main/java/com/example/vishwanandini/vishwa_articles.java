@@ -35,7 +35,7 @@ public class vishwa_articles extends AppCompatActivity {
         tablayout.setupWithViewPager(viewPager);
 
 
-        String id=getIntent().getExtras().getString("head");
-        Toast.makeText(this, ""+id, Toast.LENGTH_SHORT).show();
+//        String id=getIntent().getExtras().getString("head");
+//        Toast.makeText(this, ""+id, Toast.LENGTH_SHORT).show();
     }
 }

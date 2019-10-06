@@ -73,7 +73,7 @@ public class Fragment_vishwanandini extends Fragment {
     class CustomAdaptor extends BaseAdapter {
         @Override
         public int getCount() {
-            return l+1;   //  number of news return in the listview
+            return l+1;
         }
 
         @Override
@@ -110,7 +110,6 @@ public class Fragment_vishwanandini extends Fragment {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         JSONArray array = jsonObject.getJSONArray("data");
-                        //s=array.length();
                         id=new String[array.length()];
                         head=new String[array.length()];
                         articles=new String[array.length()];
