@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id=menuItem.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_ask_a_ques) {
             Intent intent=new Intent(getApplicationContext(),askQuestion.class);
             startActivity(intent);
