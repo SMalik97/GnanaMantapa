@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -161,9 +164,30 @@ public class Fragment_upanasyas extends Fragment {
 
             TextView atitle = (TextView) convertView.findViewById(R.id.atitle);
             TextView acontent=(TextView)convertView.findViewById(R.id.acontent);
+            final TextView comment=(TextView)convertView.findViewById(R.id.comment);
+            final EditText typeComment=(EditText) convertView.findViewById(R.id.typeComment);
+            final LinearLayout commentView=(LinearLayout) convertView.findViewById(R.id.commentView);
+            final ImageView commentPost=(ImageView) convertView.findViewById(R.id.commentPost);
 
             atitle.setText(title[position]);
             acontent.setText(content[position]);
+
+            comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    comment.setVisibility(View.GONE);
+                    commentView.setVisibility(View.VISIBLE);
+                    typeComment.requestFocus();
+                }
+            });
+
+            commentPost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    comment.setVisibility(View.VISIBLE);
+                    commentView.setVisibility(View.GONE);
+                }
+            });
 
             return convertView;
         }

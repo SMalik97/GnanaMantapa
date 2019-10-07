@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Vishwa Nandini</string>
+    <string name="app_name">Gnana Mantapa</string>
+    <string name="app_name2">‌‌‌‌ಙ್ಞಾನಮಂಟಪ</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -14,8 +15,8 @@
     <string name="menu_share">Share App</string>
     <string name="menu_send">Send</string>
     <string name="enter_your_password">Enter Your Password</string>
-    <string name="enter_your_vn_id_here">Enter Your VN-ID here</string>
+    <string name="enter_your_vn_id_here">Enter Your ID here</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="ask_question"><u>Click here to register</u></string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

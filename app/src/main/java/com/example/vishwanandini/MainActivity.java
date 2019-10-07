@@ -1,5 +1,6 @@
 package com.example.vishwanandini;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,6 +29,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "No comment found!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -78,9 +80,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
+        //Select tab programmatically
+        try{
+            String r=getIntent().getExtras().getString("register");
+            if (r.equals("1")){
+                TabLayout.Tab tab=tablayout.getTabAt(1);
+                tab.select();
+            }
+        }catch (Exception e){
+
+        }
 
 
 
+
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id=item.getItemId();
+        if (id==R.id.action_refresh){
+            Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(0,0);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -92,11 +125,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_ask_a_ques) {
-
+            Intent intent=new Intent(getApplicationContext(),askQuestion.class);
+            startActivity(intent);
         } else if (id == R.id.nav_about) {
 
         } else if (id == R.id.nav_report_app_issues) {
-
+            Intent intent=new Intent(getApplicationContext(),report.class);
+            startActivity(intent);
         } else if (id == R.id.nav_shareapp) {
 
         }
