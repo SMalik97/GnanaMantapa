@@ -184,6 +184,7 @@ public class Fragment_articles extends Fragment {
                 public void onClick(View view) {
                     comment.setVisibility(View.VISIBLE);
                     commentView.setVisibility(View.GONE);
+                    Toast.makeText(getContext(), "Posting comment...", Toast.LENGTH_SHORT).show();
                 }
             });
 
