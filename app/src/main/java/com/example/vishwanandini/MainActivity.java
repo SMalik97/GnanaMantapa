@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.setAdapter(pageAdapter);
 
         pageAdapter=new PageAdapter(getSupportFragmentManager());
-        pageAdapter.addFragments(new Fragment_vishwanandini(),"Vishwanandini");
-        pageAdapter.addFragments(new Fragment_samaskrutha(),"Samaskrutha");
+        pageAdapter.addFragments(new Fragment_vishwanandini(),"Contents");
+        pageAdapter.addFragments(new Fragment_samaskrutha(),"My Account");
         pageAdapter.addFragments(new Fragment_others(),"Others");
 
 
