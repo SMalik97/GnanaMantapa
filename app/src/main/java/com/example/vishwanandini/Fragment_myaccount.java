@@ -2,7 +2,7 @@ package com.example.vishwanandini;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,12 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 
-public class Fragment_samaskrutha extends Fragment {
+public class Fragment_myaccount extends Fragment {
 Button register;
+String login_status="No";
+String ls;
+LinearLayout profileView, loginView;
 
-    public Fragment_samaskrutha() {
+    public Fragment_myaccount() {
         // Required empty public constructor
     }
 
@@ -24,7 +28,26 @@ Button register;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_fragment_samaskrutha, container, false);
+        View view=inflater.inflate(R.layout.fragment_myaccount, container, false);
+
+        loginView=(LinearLayout)view.findViewById(R.id.loginView);
+        profileView=(LinearLayout)view.findViewById(R.id.profileView);
+
+       //check if user already logged in or not
+        SharedPreferences a=getActivity().getSharedPreferences(login_status, Context.MODE_PRIVATE);
+        ls=a.getString("loginStatus","No");
+
+        //if already logged in then hide loginView and show profileView
+        if (ls.equals("Yes")){
+            loginView.setVisibility(View.GONE);
+            profileView.setVisibility(View.VISIBLE);
+        }
+
+
+
+
+
+
                 register=(Button)view.findViewById(R.id.registration);
                 register.setOnClickListener(new View.OnClickListener() {
                     @Override

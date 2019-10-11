@@ -10,13 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -25,7 +21,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
@@ -69,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.setAdapter(pageAdapter);
 
         pageAdapter=new PageAdapter(getSupportFragmentManager());
-        pageAdapter.addFragments(new Fragment_vishwanandini(),"Contents");
-        pageAdapter.addFragments(new Fragment_samaskrutha(),"My Account");
+        pageAdapter.addFragments(new Fragment_content(),"Contents");
+        pageAdapter.addFragments(new Fragment_myaccount(),"My Account");
         pageAdapter.addFragments(new Fragment_others(),"Others");
 
 

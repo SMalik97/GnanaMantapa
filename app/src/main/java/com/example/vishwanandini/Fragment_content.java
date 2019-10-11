@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Fragment_vishwanandini extends Fragment {
+public class Fragment_content extends Fragment {
     View view;
 
     String url = "https://vp254.co.ke/vishwa/fetch_vishwa.php";
@@ -49,7 +49,7 @@ public class Fragment_vishwanandini extends Fragment {
     ProgressBar progressBar;
 
 
-    public Fragment_vishwanandini() {
+    public Fragment_content() {
         // Required empty public constructor
     }
 
