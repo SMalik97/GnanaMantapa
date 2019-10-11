@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 
 
 public class Fragment_myaccount extends Fragment {
-Button register;
+Button register,login;
 String login_status="No";
 String ls;
 LinearLayout profileView, loginView;
@@ -32,6 +32,7 @@ LinearLayout profileView, loginView;
 
         loginView=(LinearLayout)view.findViewById(R.id.loginView);
         profileView=(LinearLayout)view.findViewById(R.id.profileView);
+        login=(Button)view.findViewById(R.id.login);
 
        //check if user already logged in or not
         SharedPreferences a=getActivity().getSharedPreferences(login_status, Context.MODE_PRIVATE);
@@ -45,6 +46,16 @@ LinearLayout profileView, loginView;
 
 
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //after successful login make loginStatus Yes
+                SharedPreferences sp=getActivity().getSharedPreferences(login_status, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sp.edit();
+                editor.putString("loginStatus","Yes");
+                editor.apply();
+            }
+        });
 
 
 
