@@ -204,7 +204,7 @@ LinearLayout profileView, loginView;
                             }
                             loginView.setVisibility(View.GONE);
                             profileView.setVisibility(View.VISIBLE);
-                            Toast.makeText(getContext(), " Logged In Successful ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), " Logged In Successful! ", Toast.LENGTH_SHORT).show();
 
 
 
