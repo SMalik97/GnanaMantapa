@@ -65,17 +65,19 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=" User ID"
+                                android:text=" User Phone Number"
                                 android:textColor="#000000"
                                 android:textSize="18dp"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="10dp"
                                 />
                             <EditText
+                                android:id="@+id/userid"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/enter_your_vn_id_here"
+                                android:hint="Enter Your Phone Number"
                                 android:layout_marginLeft="10dp"
+                                android:inputType="phone"
                                 android:layout_marginRight="10dp"
                                 />
 
@@ -96,10 +98,12 @@
                                 android:layout_marginTop="10dp"
                                 />
                             <EditText
+                                android:id="@+id/password"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/enter_your_password"
                                 android:layout_marginLeft="10dp"
+                                android:inputType="textPassword"
                                 android:layout_marginRight="10dp"
                                 />
 
@@ -120,16 +124,16 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:text="Forgot Password ?     "
-                        android:layout_marginTop="5dp"
-                        android:textSize="16dp"
-                        android:textColor="#547DF4"
-                        android:textStyle="bold"
-                        />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="end"-->
+<!--                        android:text="Forgot Password ?     "-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:textSize="16dp"-->
+<!--                        android:textColor="#547DF4"-->
+<!--                        android:textStyle="bold"-->
+<!--                        />-->
                     <Button
                         android:id="@+id/registration"
                         android:layout_width="match_parent"
@@ -162,12 +166,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
         <ImageView
             android:id="@+id/profilePic"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/avatar"/>
 
         <LinearLayout
@@ -187,6 +199,7 @@
                     android:textStyle="bold"
                     android:textColor="#000000"/>
                 <TextView
+                    android:id="@+id/username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Username:  "
@@ -208,6 +221,7 @@
                     android:textStyle="bold"
                     android:textColor="#000000"/>
                 <TextView
+                    android:id="@+id/userphoneno"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="User phone no"
@@ -228,12 +242,51 @@
                     android:textColor="#000000"/>
 
                 <TextView
+                    android:id="@+id/usercity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="User city"
                     android:textColor="#000000"
                     android:textSize="20sp" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email:  "
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/useremail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User city"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Log out   "
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#ffffff"
+                android:background="#106163"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"/>
         </LinearLayout>
     </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
 </LinearLayout>

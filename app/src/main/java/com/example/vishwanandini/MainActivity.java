@@ -24,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -107,6 +108,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             overridePendingTransition(0,0);
             finish();
             return true;
+        }else if (id==R.id.action_notification){
+            Intent i=new Intent(getApplicationContext(),notification.class);
+            startActivity(i);
+            return true;
+        }else if (id==R.id.action_language){
+            if (item.getTitle().equals("English")) {
+                item.setTitle("Kannada");
+            }else {
+                item.setTitle("English");
+            }
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -134,5 +146,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+    public void popupmenu(){
+       View view=getSupportActionBar().getCustomView();
+                PopupMenu popupMenu=new PopupMenu(this,view);
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                //medium.setText(menuItem.getTitle());
+
+                return false;
+            }
+        });
+        popupMenu.inflate(R.menu.popup_menu);
+        popupMenu.show();
     }
 }
