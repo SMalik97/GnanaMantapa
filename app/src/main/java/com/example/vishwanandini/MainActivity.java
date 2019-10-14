@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 Snackbar.make(view, "No comment found!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                Intent i=new Intent(getApplicationContext(),Commentposting.class);
+                startActivity(i);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -147,18 +150,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return true;
     }
-    public void popupmenu(){
-       View view=getSupportActionBar().getCustomView();
-                PopupMenu popupMenu=new PopupMenu(this,view);
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                //medium.setText(menuItem.getTitle());
 
-                return false;
-            }
-        });
-        popupMenu.inflate(R.menu.popup_menu);
-        popupMenu.show();
-    }
 }

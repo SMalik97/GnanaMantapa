@@ -1,7 +1,9 @@
 package com.example.vishwanandini;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -39,6 +41,10 @@ import java.util.Map;
 
 public class Fragment_articles extends Fragment {
     String url = "https://vp254.co.ke/vishwa/fetch_articles.php";
+
+    String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
+    String login_status="No",login_name="No",login_email="No";
+    String em;
     List<ListDataArticles> list_data_articles;
     String[] id;
     String[] title;
@@ -157,7 +163,7 @@ public class Fragment_articles extends Fragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater().inflate(R.layout.articles, null);
 
             TextView atitle = (TextView) convertView.findViewById(R.id.atitle);
@@ -176,6 +182,9 @@ public class Fragment_articles extends Fragment {
                     comment.setVisibility(View.GONE);
                     commentView.setVisibility(View.VISIBLE);
                     typeComment.requestFocus();
+                    comment.setVisibility(View.GONE);
+                    commentView.setVisibility(View.VISIBLE);
+
                 }
             });
 
@@ -184,7 +193,52 @@ public class Fragment_articles extends Fragment {
                 public void onClick(View view) {
                     comment.setVisibility(View.VISIBLE);
                     commentView.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), "Posting comment...", Toast.LENGTH_SHORT).show();
+
+
+
+                    SharedPreferences b=getActivity().getSharedPreferences(login_name, Context.MODE_PRIVATE);
+                    final String comment_name=b.getString("loginName","No");
+
+
+                    SharedPreferences e=getActivity().getSharedPreferences(login_email, Context.MODE_PRIVATE);
+                    em=e.getString("loginEmail","No");
+
+                    StringRequest request=new StringRequest(Request.Method.POST, comment_url, new Response.Listener<String>() {
+
+
+
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(getContext(), response.trim()+"", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getContext(), "Slow internet connection!", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }){
+
+                        protected HashMap<String,String> getParams() throws AuthFailureError
+                        {
+                          //  Toast.makeText(getContext(), typecomments+" "+comment_name, Toast.LENGTH_SHORT).show();
+
+                            HashMap<String,String> params=new HashMap<>();
+
+                            params.put("typecomments",typeComment.getText().toString().trim());
+                            params.put("comment_name",comment_name);
+                            params.put("comment_email",em);
+                            params.put("postid",id[position]);
+
+                            return params;
+                        }
+
+                    };
+
+                    RequestQueue requestQueue= Volley.newRequestQueue(getContext());
+                    requestQueue.add(request);
+
                 }
             });
 

@@ -1,6 +1,8 @@
 package com.example.vishwanandini;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -46,6 +48,9 @@ public class Fragment_upanasyas extends Fragment {
     ListView listView;
     ProgressBar progressBar;
     String head;
+
+    String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
+    String login_status="No",login_name="No",login_email="No";
 
     public Fragment_upanasyas() {
         // Required empty public constructor
@@ -159,7 +164,7 @@ public class Fragment_upanasyas extends Fragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater().inflate(R.layout.articles, null);
 
             TextView atitle = (TextView) convertView.findViewById(R.id.atitle);
@@ -178,6 +183,8 @@ public class Fragment_upanasyas extends Fragment {
                     comment.setVisibility(View.GONE);
                     commentView.setVisibility(View.VISIBLE);
                     typeComment.requestFocus();
+                    comment.setVisibility(View.GONE);
+                    commentView.setVisibility(View.VISIBLE);
                 }
             });
 
@@ -187,8 +194,51 @@ public class Fragment_upanasyas extends Fragment {
                     comment.setVisibility(View.VISIBLE);
                     commentView.setVisibility(View.GONE);
                     Toast.makeText(getContext(), "Posting comment...", Toast.LENGTH_SHORT).show();
+
+                    final String typecomments=typeComment.getText().toString().trim();
+
+
+                    SharedPreferences b=getActivity().getSharedPreferences(login_name, Context.MODE_PRIVATE);
+                    final String comment_name=b.getString("loginName","No");
+
+                    SharedPreferences e=getActivity().getSharedPreferences(login_email, Context.MODE_PRIVATE);
+                    final String comment_email=e.getString("loginEmail","No");
+
+                    StringRequest request=new StringRequest(Request.Method.POST, comment_url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(getContext(), response.trim()+"", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getContext(), "Slow internet connection!", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }){
+
+                        protected HashMap<String,String> getParams() throws AuthFailureError
+                        {
+                            HashMap<String,String> params=new HashMap<>();
+
+                            params.put("typecomments",typecomments);
+                            params.put("comment_name",comment_name);
+                            params.put("comment_email",comment_email);
+                            params.put("postid",id[position]);
+
+                            return params;
+                        }
+
+                    };
+
+                    RequestQueue requestQueue= Volley.newRequestQueue(getContext());
+                    requestQueue.add(request);
+
                 }
             });
+
+
 
             return convertView;
         }
