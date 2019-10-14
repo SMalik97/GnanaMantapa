@@ -1,8 +1,12 @@
 package com.example.vishwanandini;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -49,6 +53,11 @@ public class Fragment_upanasyas extends Fragment {
     ProgressBar progressBar;
     String head;
 
+    private boolean playPause;
+    private MediaPlayer mediaPlayer;
+    private ProgressDialog progressDialog;
+    private boolean initialStage = true;
+
     String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
     String login_status="No",login_name="No",login_email="No";
 
@@ -74,6 +83,12 @@ public class Fragment_upanasyas extends Fragment {
 
         fetchupanasyas fa=new fetchupanasyas();
         new Thread(fa).start();
+
+
+        //initialize media player
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        progressDialog = new ProgressDialog(getContext());
 
 
         return view;
@@ -173,9 +188,58 @@ public class Fragment_upanasyas extends Fragment {
             final EditText typeComment=(EditText) convertView.findViewById(R.id.typeComment);
             final LinearLayout commentView=(LinearLayout) convertView.findViewById(R.id.commentView);
             final ImageView commentPost=(ImageView) convertView.findViewById(R.id.commentPost);
+            final ImageView audioStream=(ImageView)convertView.findViewById(R.id.audioStream);
+            final ImageView audioStop=(ImageView)convertView.findViewById(R.id.audioStop);
+
 
             atitle.setText(title[position]);
             acontent.setText(content[position]);
+
+
+
+            audioStream.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!playPause) {
+                        audioStream.setImageResource(R.drawable.ic_pause_circle_outline_black_24dp);
+                        audioStop.setVisibility(View.VISIBLE);
+
+                        if (initialStage) {
+                            new Player().execute("https://www.ssaurel.com/tmp/mymusic.mp3");
+                        } else {
+                            if (!mediaPlayer.isPlaying())
+                                mediaPlayer.start();
+                        }
+
+                        playPause = true;
+
+                    } else {
+                        audioStream.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+                        audioStop.setVisibility(View.VISIBLE);
+
+                        if (mediaPlayer.isPlaying()) {
+                            mediaPlayer.pause();
+                        }
+
+                        playPause = false;
+                    }
+                }
+
+            });
+
+
+            audioStop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    audioStop.setVisibility(View.INVISIBLE);
+                    audioStream.setImageResource(R.drawable.ic_volume_up_black_24dp);
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.stop();
+                    }
+                }
+            });
+
+
 
             comment.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -244,4 +308,66 @@ public class Fragment_upanasyas extends Fragment {
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mediaPlayer != null) {
+            mediaPlayer.reset();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
+    class Player extends AsyncTask<String, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(String... strings) {
+            Boolean prepared = false;
+
+            try {
+                mediaPlayer.setDataSource(strings[0]);
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        initialStage = true;
+                        playPause = false;
+                        //show play icon
+                        mediaPlayer.stop();
+                        mediaPlayer.reset();
+                    }
+                });
+
+                mediaPlayer.prepare();
+                prepared = true;
+
+            } catch (Exception e) {
+
+                prepared = false;
+            }
+
+            return prepared;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+
+            mediaPlayer.start();
+            initialStage = false;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog.setMessage("Buffering...");
+            progressDialog.show();
+        }
+
+
+    }
 }

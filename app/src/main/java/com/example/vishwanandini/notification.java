@@ -3,7 +3,10 @@ package com.example.vishwanandini;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -161,5 +164,23 @@ public class notification extends AppCompatActivity {
 
             return convertView;
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.refresh_menu,menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id=item.getItemId();
+        if (id==R.id.action_refresh){
+            Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(getApplicationContext(),notification.class);
+            startActivity(intent);
+            overridePendingTransition(0,0);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
