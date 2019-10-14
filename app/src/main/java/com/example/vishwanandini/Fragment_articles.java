@@ -188,7 +188,7 @@ public class Fragment_articles extends Fragment {
             final LinearLayout commentView=(LinearLayout) convertView.findViewById(R.id.commentView);
             final ImageView commentPost=(ImageView) convertView.findViewById(R.id.commentPost);
             final ImageView audioStream=(ImageView)convertView.findViewById(R.id.audioStream);
-            final ImageView audioStop=(ImageView)convertView.findViewById(R.id.audioStop);
+
 
             atitle.setText(title[position]);
             acontent.setText(content[position]);
@@ -198,7 +198,7 @@ public class Fragment_articles extends Fragment {
                 public void onClick(View view) {
                     if (!playPause) {
                         audioStream.setImageResource(R.drawable.ic_pause_circle_outline_black_24dp);
-                        audioStop.setVisibility(View.VISIBLE);
+
 
                         if (initialStage) {
                             new Player().execute("https://www.ssaurel.com/tmp/mymusic.mp3");
@@ -211,7 +211,6 @@ public class Fragment_articles extends Fragment {
 
                     } else {
                         audioStream.setImageResource(R.drawable.ic_play_arrow_black_24dp);
-                        audioStop.setVisibility(View.VISIBLE);
 
                         if (mediaPlayer.isPlaying()) {
                             mediaPlayer.pause();
@@ -224,16 +223,6 @@ public class Fragment_articles extends Fragment {
             });
 
 
-            audioStop.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    audioStop.setVisibility(View.INVISIBLE);
-                    audioStream.setImageResource(R.drawable.ic_volume_up_black_24dp);
-                    if (mediaPlayer.isPlaying()) {
-                        mediaPlayer.stop();
-                    }
-                }
-            });
 
 
 
@@ -280,7 +269,7 @@ public class Fragment_articles extends Fragment {
 
                         protected HashMap<String,String> getParams() throws AuthFailureError
                         {
-                          //  Toast.makeText(getContext(), typecomments+" "+comment_name, Toast.LENGTH_SHORT).show();
+                            //  Toast.makeText(getContext(), typecomments+" "+comment_name, Toast.LENGTH_SHORT).show();
 
                             HashMap<String,String> params=new HashMap<>();
 
