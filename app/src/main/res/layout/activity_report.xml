@@ -7,6 +7,7 @@
     tools:context=".report">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -28,15 +29,18 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/issue_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
             android:layout_marginRight="20sp"
             android:hint="Name"
             android:singleLine="true"
+
             android:textColor="#000000" />
 
         <EditText
+            android:id="@+id/issue_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
@@ -46,6 +50,7 @@
             android:textColor="#000000" />
 
         <EditText
+            android:id="@+id/issue_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
@@ -55,6 +60,7 @@
             android:textColor="#000000" />
 
         <EditText
+            android:id="@+id/issue_issue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
@@ -63,6 +69,7 @@
             android:textColor="#000000" />
 
         <Button
+            android:id="@+id/issue_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

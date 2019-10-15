@@ -38,7 +38,7 @@ public class notification extends AppCompatActivity {
     int l;
 
     ListView listView;
-    List<ListDataArticles> list_data_items;
+    List<ListDataNotification> list_data_noti;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class notification extends AppCompatActivity {
         nonotificationView=(CardView)findViewById(R.id.nonotificationView) ;
         loadingView=(CardView)findViewById(R.id.loadingView);
 
-        list_data_items=new ArrayList<>();
+        list_data_noti=new ArrayList<>();
 
         listView=(ListView)findViewById(R.id.listview);
 
@@ -82,12 +82,12 @@ public class notification extends AppCompatActivity {
 
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject ob = array.getJSONObject(i);
-                                ListDataArticles notify_articles = new ListDataArticles(
+                                ListDataNotification notify_articles = new ListDataNotification(
                                         ob.getString("notifyId"),
                                         ob.getString("notifyTitle"),
                                         ob.getString("notifyContent"));
 
-                                list_data_items.add(notify_articles);
+                                list_data_noti.add(notify_articles);
 
                                 l = i;
 

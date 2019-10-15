@@ -1,15 +1,15 @@
 package com.example.vishwanandini;
 
-public class ListDataArticles {
+public class ListDataNotification {
 
-    String id,title,content,audio;
+    String id,title,content;
 
-    public ListDataArticles(String id, String title, String content,String audio) {
+    public ListDataNotification(String id, String title, String content) {
 
         this.id=id;
         this.title=title;
         this.content=content;
-        this.audio=audio;
+
 
 
     }
@@ -25,8 +25,6 @@ public class ListDataArticles {
     public String getContent() {
         return content;
     }
-    public String getAudio() {
-        return audio;
-    }
+
 
 }

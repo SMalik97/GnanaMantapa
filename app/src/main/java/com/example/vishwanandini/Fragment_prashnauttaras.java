@@ -47,6 +47,7 @@ public class Fragment_prashnauttaras extends Fragment {
     String[] id;
     String[] title;
     String[] content;
+    String[] audio;
     int l;
     ListView listView;
     ProgressBar progressBar;
@@ -107,12 +108,14 @@ public class Fragment_prashnauttaras extends Fragment {
                         id=new String[array.length()];
                         content=new String[array.length()];
                         title=new String[array.length()];
+                        audio=new String[array.length()];
                         for (int i = 0; i < array.length(); i++) {
                             JSONObject ob = array.getJSONObject(i);
                             ListDataArticles listdataarticles = new ListDataArticles(
                                     ob.getString("id"),
                                     ob.getString("title"),
-                                    ob.getString("content"));
+                                    ob.getString("content"),
+                                    ob.getString("audioLink"));
                             list_data_articles.add(listdataarticles);
 
                             l = i;
@@ -120,6 +123,7 @@ public class Fragment_prashnauttaras extends Fragment {
                             id[i] = listdataarticles.getId();
                             title[i] = listdataarticles.getTitle();
                             content[i] = listdataarticles.getContent();
+                            audio[i] = listdataarticles.getAudio();
 
                             CustomAdaptor customAdaptor=new CustomAdaptor();
                             listView.setAdapter(customAdaptor);
@@ -202,9 +206,9 @@ public class Fragment_prashnauttaras extends Fragment {
                     if (!playPause) {
                         audioStream.setImageResource(R.drawable.ic_pause_circle_outline_black_24dp);
 
-
+                        Toast.makeText(getContext(), audio[position]+"", Toast.LENGTH_SHORT).show();
                         if (initialStage) {
-                            new Player().execute("https://www.ssaurel.com/tmp/mymusic.mp3");
+                            new Player().execute(audio[position]);
                         } else {
                             if (!mediaPlayer.isPlaying())
                                 mediaPlayer.start();
@@ -278,6 +282,7 @@ public class Fragment_prashnauttaras extends Fragment {
                             params.put("comment_name",comment_name);
                             params.put("comment_email",comment_email);
                             params.put("postid",id[position]);
+                            params.put("postcatagory","Prashnauttaras");
 
                             return params;
                         }
