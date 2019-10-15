@@ -72,7 +72,7 @@ public class registration extends AppCompatActivity {
                     pass.setError("Enter a valid password");
                     pass.requestFocus();
                 }
-                else if(repass.getText().toString().trim().equals(pass.getText().toString().trim()))
+                else if(!repass.getText().toString().trim().equals(pass.getText().toString().trim()))
                 {
                     repass.setError("Password not matched");
                     repass.requestFocus();
