@@ -120,6 +120,34 @@
             android:hint="Enter your e-mail here"
             android:inputType="textEmailAddress"/>
     </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_textbackground"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_margin="8dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter a new password"
+                android:inputType="textEmailAddress"/>
+            <EditText
+                android:id="@+id/repass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Repeat your password"
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
 
     <Button
         android:id="@+id/register"

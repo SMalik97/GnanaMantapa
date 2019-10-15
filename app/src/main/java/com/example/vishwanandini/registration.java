@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 public class registration extends AppCompatActivity {
 
-    EditText name,city,mobile,email;
+    EditText name,city,mobile,email,pass,repass;
     Button register;
     String database_url="https://vp254.co.ke/vishwa/insert.php";
     ProgressDialog progressDialog;
@@ -36,6 +36,8 @@ public class registration extends AppCompatActivity {
         city=(EditText)findViewById(R.id.city);
         mobile=(EditText)findViewById(R.id.mobile);
         email=(EditText)findViewById(R.id.email);
+        pass=(EditText)findViewById(R.id.pass);
+        repass=(EditText)findViewById(R.id.repass);
 
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Please wait, processing...");
@@ -47,19 +49,33 @@ public class registration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(name.getText().toString().trim().equals(""))
+                if(name.getText().toString().trim().equals("")) {
                     name.setError("Enter Valid Name");
-                else if(city.getText().toString().trim().equals(""))
+                    name.requestFocus();
+                }else if(city.getText().toString().trim().equals(""))
                 {
                     city.setError("Enter Your City");
+                    city.requestFocus();
                 }
                 else if (mobile.getText().toString().trim().equals(""))
                 {
                     mobile.setError("Enter Mobile");
+                    mobile.requestFocus();
                 }
                 else if(email.getText().toString().trim().equals(""))
                 {
                     email.setError("Enter Your E-mail");
+                    email.requestFocus();
+                }
+                else if(pass.getText().toString().trim().equals(""))
+                {
+                    pass.setError("Enter a valid password");
+                    pass.requestFocus();
+                }
+                else if(repass.getText().toString().trim().equals(pass.getText().toString().trim()))
+                {
+                    repass.setError("Password not matched");
+                    repass.requestFocus();
                 }
                 else
                 {
@@ -74,6 +90,7 @@ public class registration extends AppCompatActivity {
                     }
                     else
                         mobile.setError("Mobile Number should be of 10 Digits");
+                        mobile.requestFocus();
                 }
 
             }
@@ -124,6 +141,7 @@ public class registration extends AppCompatActivity {
                     params.put("citys",citys);
                     params.put("mobiles",mobiles);
                     params.put("emails",emails);
+                    params.put("pass",pass.getText().toString().trim());
 
 
                     return params;
