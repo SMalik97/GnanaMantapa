@@ -9,8 +9,11 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
+    <string name="menu_home2">ನಮ್ಮ ಕುರಿತು</string>
     <string name="menu_gallery">Ask a Question</string>
+    <string name="menu_gallery2">ವ್ಯಾಕರಣ ವಿಭಾಗ</string>
     <string name="menu_slideshow">About</string>
+    <string name="menu_slideshow2">ಪ್ರಶ್ನೋತ್ತರ ವಿಭಾಗ</string>
     <string name="menu_tools">Report App Issues</string>
     <string name="menu_share">Share App</string>
     <string name="menu_send">Send</string>

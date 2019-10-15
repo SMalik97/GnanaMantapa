@@ -68,9 +68,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.setAdapter(pageAdapter);
 
         pageAdapter=new PageAdapter(getSupportFragmentManager());
-        pageAdapter.addFragments(new Fragment_content(),"Contents");
-        pageAdapter.addFragments(new Fragment_myaccount(),"My Account");
-        pageAdapter.addFragments(new Fragment_others(),"Others");
+        pageAdapter.addFragments(new Fragment_content(),"ಉಪನ್ಯಾಸ");   //Contents
+        pageAdapter.addFragments(new Fragment_myaccount(),"ವಿಶೇಷ ಮಾಹಿತಿ"); //My Account
+        pageAdapter.addFragments(new Fragment_others(),"ಲೇಖನಗಳು"); //Others
 
 
         viewPager.setAdapter(pageAdapter);

@@ -203,7 +203,6 @@ public class Fragment_articles extends Fragment {
                     if (!playPause) {
                         audioStream.setImageResource(R.drawable.ic_pause_circle_outline_black_24dp);
 
-                        Toast.makeText(getContext(), audio[position]+"", Toast.LENGTH_SHORT).show();
                         if (initialStage) {
                             new Player().execute(audio[position]);
                         } else {
