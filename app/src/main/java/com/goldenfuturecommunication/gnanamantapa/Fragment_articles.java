@@ -1,4 +1,4 @@
-package com.example.vishwanandini;
+package com.goldenfuturecommunication.gnanamantapa;
 
 
 import android.app.ProgressDialog;
@@ -41,8 +41,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Fragment_prashnauttaras extends Fragment {
-    String url = "https://vp254.co.ke/vishwa/fetch_prashnauttaras.php";
+
+public class Fragment_articles extends Fragment {
+    String url = "https://vp254.co.ke/vishwa/fetch_articles.php";
+
+    String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
+    String login_status="No",login_name="No",login_email="No";
+    String em;
     List<ListDataArticles> list_data_articles;
     String[] id;
     String[] title;
@@ -52,16 +57,13 @@ public class Fragment_prashnauttaras extends Fragment {
     ListView listView;
     ProgressBar progressBar;
     String head;
-    String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
-    String login_status="No",login_name="No",login_email="No";
-
     private boolean playPause;
     private MediaPlayer mediaPlayer;
     private ProgressDialog progressDialog;
     private boolean initialStage = true;
+    String ls;
 
-
-    public Fragment_prashnauttaras() {
+    public Fragment_articles() {
         // Required empty public constructor
     }
 
@@ -70,19 +72,17 @@ public class Fragment_prashnauttaras extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout.fragment_fragment_prashnauttaras, container, false);
-
+        View view=inflater.inflate(R.layout.fragment_fragment_articles, container, false);
         head=getActivity().getIntent().getExtras().getString("head");
-       // Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
+
         progressBar=(ProgressBar)view.findViewById(R.id.progressBar);
 
         listView=(ListView)view.findViewById(R.id.listview);
 
         list_data_articles=new ArrayList<>();
 
-        fetchprashnauttaras fa=new fetchprashnauttaras();
+        fetcharticles fa=new fetcharticles();
         new Thread(fa).start();
-
 
 
         //initialize media player
@@ -91,11 +91,10 @@ public class Fragment_prashnauttaras extends Fragment {
         progressDialog = new ProgressDialog(getContext());
 
 
-
-
         return view;
     }
-    class fetchprashnauttaras implements Runnable{
+
+    class fetcharticles implements Runnable{
         @Override
         public void run() {
             StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -151,7 +150,7 @@ public class Fragment_prashnauttaras extends Fragment {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getContext(), "Some error occurred!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Slow internet connection!", Toast.LENGTH_SHORT).show();
                 }
             }){
                 @Override
@@ -198,8 +197,6 @@ public class Fragment_prashnauttaras extends Fragment {
             atitle.setText(title[position]);
             acontent.setText(content[position]);
 
-
-
             audioStream.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -218,7 +215,6 @@ public class Fragment_prashnauttaras extends Fragment {
                     } else {
                         audioStream.setImageResource(R.drawable.ic_play_arrow_black_24dp);
 
-
                         if (mediaPlayer.isPlaying()) {
                             mediaPlayer.pause();
                         }
@@ -233,15 +229,23 @@ public class Fragment_prashnauttaras extends Fragment {
 
 
 
-
             comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    comment.setVisibility(View.GONE);
-                    commentView.setVisibility(View.VISIBLE);
-                    typeComment.requestFocus();
-                    comment.setVisibility(View.GONE);
-                    commentView.setVisibility(View.VISIBLE);
+                    SharedPreferences a=getActivity().getSharedPreferences(login_status, Context.MODE_PRIVATE);
+                    ls=a.getString("loginStatus","No");
+
+                    if (ls.equals("Yes")) {
+                        comment.setVisibility(View.GONE);
+                        commentView.setVisibility(View.VISIBLE);
+                        typeComment.requestFocus();
+                        comment.setVisibility(View.GONE);
+                        commentView.setVisibility(View.VISIBLE);
+                        audioStream.setVisibility(View.INVISIBLE);
+                    }else {
+                        Toast.makeText(getContext(), "You have to login to comment on the post", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             });
 
@@ -250,14 +254,16 @@ public class Fragment_prashnauttaras extends Fragment {
                 public void onClick(View view) {
                     comment.setVisibility(View.VISIBLE);
                     commentView.setVisibility(View.GONE);
-                    final String typecomments=typeComment.getText().toString().trim();
+                    audioStream.setVisibility(View.VISIBLE);
+
 
 
                     SharedPreferences b=getActivity().getSharedPreferences(login_name, Context.MODE_PRIVATE);
                     final String comment_name=b.getString("loginName","No");
 
+
                     SharedPreferences e=getActivity().getSharedPreferences(login_email, Context.MODE_PRIVATE);
-                    final String comment_email=e.getString("loginEmail","No");
+                    em=e.getString("loginEmail","No");
 
                     StringRequest request=new StringRequest(Request.Method.POST, comment_url, new Response.Listener<String>() {
                         @Override
@@ -275,13 +281,15 @@ public class Fragment_prashnauttaras extends Fragment {
 
                         protected HashMap<String,String> getParams() throws AuthFailureError
                         {
+                            //  Toast.makeText(getContext(), typecomments+" "+comment_name, Toast.LENGTH_SHORT).show();
+
                             HashMap<String,String> params=new HashMap<>();
 
-                            params.put("typecomments",typecomments);
+                            params.put("typecomments",typeComment.getText().toString().trim());
                             params.put("comment_name",comment_name);
-                            params.put("comment_email",comment_email);
+                            params.put("comment_email",em);
                             params.put("postid",id[position]);
-                            params.put("postcatagory","Prashnauttaras");
+                            params.put("postcatagory","Articles");
 
                             return params;
                         }
@@ -358,5 +366,7 @@ public class Fragment_prashnauttaras extends Fragment {
             progressDialog.show();
         }
     }
+
+
 
 }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "8041393808",
+    "firebase_url": "https://gnana-mantapa.firebaseio.com",
+    "project_id": "gnana-mantapa",
+    "storage_bucket": "gnana-mantapa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8041393808:android:cfe5ba11f03bb74e3b7215",
+        "android_client_info": {
+          "package_name": "com.goldenfuturecommunication.gnanamantapa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8041393808-aq6rr3quoq8bf193v98ulmcjvp3e23k8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.goldenfuturecommunication.gnanamantapa",
+            "certificate_hash": "a927996d30fe4d38e93a0a7d94343b4b98276286"
+          }
+        },
+        {
+          "client_id": "8041393808-it3iuad289fnk2vutlkpbgmob34ic5pg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIMW5JXFTbT7J2Rr0fqQ3BrdHa34RyZ88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8041393808-it3iuad289fnk2vutlkpbgmob34ic5pg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

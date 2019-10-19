@@ -1,4 +1,4 @@
-package com.example.vishwanandini;
+package com.goldenfuturecommunication.gnanamantapa;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;

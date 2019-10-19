@@ -1,10 +1,10 @@
-package com.example.vishwanandini;
+package com.goldenfuturecommunication.gnanamantapa;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.vishwanandini.R;
+import com.goldenfuturecommunication.gnanamantapa.R;
 
 public class Commentposting extends AppCompatActivity {
 

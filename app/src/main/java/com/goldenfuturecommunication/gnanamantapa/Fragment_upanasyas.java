@@ -1,9 +1,8 @@
-package com.example.vishwanandini;
+package com.goldenfuturecommunication.gnanamantapa;
 
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -43,12 +42,8 @@ import java.util.List;
 import java.util.Map;
 
 
-public class Fragment_articles extends Fragment {
-    String url = "https://vp254.co.ke/vishwa/fetch_articles.php";
-
-    String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
-    String login_status="No",login_name="No",login_email="No";
-    String em;
+public class Fragment_upanasyas extends Fragment {
+    String url = "https://vp254.co.ke/vishwa/fetch_upanasyas.php";
     List<ListDataArticles> list_data_articles;
     String[] id;
     String[] title;
@@ -58,12 +53,17 @@ public class Fragment_articles extends Fragment {
     ListView listView;
     ProgressBar progressBar;
     String head;
+
     private boolean playPause;
     private MediaPlayer mediaPlayer;
     private ProgressDialog progressDialog;
     private boolean initialStage = true;
+    String ls;
 
-    public Fragment_articles() {
+    String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
+    String login_status="No",login_name="No",login_email="No";
+
+    public Fragment_upanasyas() {
         // Required empty public constructor
     }
 
@@ -72,8 +72,10 @@ public class Fragment_articles extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout.fragment_fragment_articles, container, false);
+        View view=inflater.inflate(R.layout.fragment_fragment_upanasyas, container, false);
+
         head=getActivity().getIntent().getExtras().getString("head");
+        //Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
 
         progressBar=(ProgressBar)view.findViewById(R.id.progressBar);
 
@@ -81,7 +83,7 @@ public class Fragment_articles extends Fragment {
 
         list_data_articles=new ArrayList<>();
 
-        fetcharticles fa=new fetcharticles();
+        fetchupanasyas fa=new fetchupanasyas();
         new Thread(fa).start();
 
 
@@ -94,7 +96,7 @@ public class Fragment_articles extends Fragment {
         return view;
     }
 
-    class fetcharticles implements Runnable{
+    class fetchupanasyas implements Runnable{
         @Override
         public void run() {
             StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -124,7 +126,7 @@ public class Fragment_articles extends Fragment {
                             content[i] = listdataarticles.getContent();
                             audio[i] = listdataarticles.getAudio();
 
-                            CustomAdaptor customAdaptor=new CustomAdaptor();
+                          CustomAdaptor customAdaptor=new CustomAdaptor();
                             listView.setAdapter(customAdaptor);
 
                         }
@@ -150,7 +152,7 @@ public class Fragment_articles extends Fragment {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getContext(), "Slow internet connection!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Some error occurred!", Toast.LENGTH_SHORT).show();
                 }
             }){
                 @Override
@@ -194,8 +196,11 @@ public class Fragment_articles extends Fragment {
             final ImageView audioStream=(ImageView)convertView.findViewById(R.id.audioStream);
 
 
+
             atitle.setText(title[position]);
             acontent.setText(content[position]);
+
+
 
             audioStream.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -215,6 +220,7 @@ public class Fragment_articles extends Fragment {
                     } else {
                         audioStream.setImageResource(R.drawable.ic_play_arrow_black_24dp);
 
+
                         if (mediaPlayer.isPlaying()) {
                             mediaPlayer.pause();
                         }
@@ -229,15 +235,23 @@ public class Fragment_articles extends Fragment {
 
 
 
+
             comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    SharedPreferences a=getActivity().getSharedPreferences(login_status, Context.MODE_PRIVATE);
+                    ls=a.getString("loginStatus","No");
+
+                    if (ls.equals("Yes")) {
                     comment.setVisibility(View.GONE);
                     commentView.setVisibility(View.VISIBLE);
                     typeComment.requestFocus();
                     comment.setVisibility(View.GONE);
                     commentView.setVisibility(View.VISIBLE);
-
+                        audioStream.setVisibility(View.INVISIBLE);
+                    }else {
+                        Toast.makeText(getContext(), "You have to login to comment on the post", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -246,15 +260,17 @@ public class Fragment_articles extends Fragment {
                 public void onClick(View view) {
                     comment.setVisibility(View.VISIBLE);
                     commentView.setVisibility(View.GONE);
+                    audioStream.setVisibility(View.VISIBLE);
+                    Toast.makeText(getContext(), "Posting comment...", Toast.LENGTH_SHORT).show();
 
+                    final String typecomments=typeComment.getText().toString().trim();
 
 
                     SharedPreferences b=getActivity().getSharedPreferences(login_name, Context.MODE_PRIVATE);
                     final String comment_name=b.getString("loginName","No");
 
-
                     SharedPreferences e=getActivity().getSharedPreferences(login_email, Context.MODE_PRIVATE);
-                    em=e.getString("loginEmail","No");
+                    final String comment_email=e.getString("loginEmail","No");
 
                     StringRequest request=new StringRequest(Request.Method.POST, comment_url, new Response.Listener<String>() {
                         @Override
@@ -272,15 +288,13 @@ public class Fragment_articles extends Fragment {
 
                         protected HashMap<String,String> getParams() throws AuthFailureError
                         {
-                            //  Toast.makeText(getContext(), typecomments+" "+comment_name, Toast.LENGTH_SHORT).show();
-
                             HashMap<String,String> params=new HashMap<>();
 
-                            params.put("typecomments",typeComment.getText().toString().trim());
+                            params.put("typecomments",typecomments);
                             params.put("comment_name",comment_name);
-                            params.put("comment_email",em);
+                            params.put("comment_email",comment_email);
                             params.put("postid",id[position]);
-                            params.put("postcatagory","Articles");
+                            params.put("postcatagory","Upanyasas");
 
                             return params;
                         }
@@ -292,6 +306,8 @@ public class Fragment_articles extends Fragment {
 
                 }
             });
+
+
 
             return convertView;
         }
@@ -356,8 +372,7 @@ public class Fragment_articles extends Fragment {
             progressDialog.setMessage("Buffering...");
             progressDialog.show();
         }
+
+
     }
-
-
-
 }

@@ -1,4 +1,4 @@
-package com.example.vishwanandini;
+package com.goldenfuturecommunication.gnanamantapa;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +24,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{

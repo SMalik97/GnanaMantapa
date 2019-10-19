@@ -1,4 +1,4 @@
-package com.example.vishwanandini;
+package com.goldenfuturecommunication.gnanamantapa;
 
 import org.junit.Test;
 

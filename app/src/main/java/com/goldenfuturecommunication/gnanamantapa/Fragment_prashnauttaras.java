@@ -1,4 +1,4 @@
-package com.example.vishwanandini;
+package com.goldenfuturecommunication.gnanamantapa;
 
 
 import android.app.ProgressDialog;
@@ -41,9 +41,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-public class Fragment_upanasyas extends Fragment {
-    String url = "https://vp254.co.ke/vishwa/fetch_upanasyas.php";
+public class Fragment_prashnauttaras extends Fragment {
+    String url = "https://vp254.co.ke/vishwa/fetch_prashnauttaras.php";
     List<ListDataArticles> list_data_articles;
     String[] id;
     String[] title;
@@ -53,16 +52,17 @@ public class Fragment_upanasyas extends Fragment {
     ListView listView;
     ProgressBar progressBar;
     String head;
+    String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
+    String login_status="No",login_name="No",login_email="No";
+    String ls;
 
     private boolean playPause;
     private MediaPlayer mediaPlayer;
     private ProgressDialog progressDialog;
     private boolean initialStage = true;
 
-    String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
-    String login_status="No",login_name="No",login_email="No";
 
-    public Fragment_upanasyas() {
+    public Fragment_prashnauttaras() {
         // Required empty public constructor
     }
 
@@ -71,19 +71,19 @@ public class Fragment_upanasyas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout.fragment_fragment_upanasyas, container, false);
+        View view=inflater.inflate(R.layout.fragment_fragment_prashnauttaras, container, false);
 
         head=getActivity().getIntent().getExtras().getString("head");
-        //Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
-
+       // Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();
         progressBar=(ProgressBar)view.findViewById(R.id.progressBar);
 
         listView=(ListView)view.findViewById(R.id.listview);
 
         list_data_articles=new ArrayList<>();
 
-        fetchupanasyas fa=new fetchupanasyas();
+        fetchprashnauttaras fa=new fetchprashnauttaras();
         new Thread(fa).start();
+
 
 
         //initialize media player
@@ -92,10 +92,11 @@ public class Fragment_upanasyas extends Fragment {
         progressDialog = new ProgressDialog(getContext());
 
 
+
+
         return view;
     }
-
-    class fetchupanasyas implements Runnable{
+    class fetchprashnauttaras implements Runnable{
         @Override
         public void run() {
             StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -125,7 +126,7 @@ public class Fragment_upanasyas extends Fragment {
                             content[i] = listdataarticles.getContent();
                             audio[i] = listdataarticles.getAudio();
 
-                          CustomAdaptor customAdaptor=new CustomAdaptor();
+                            CustomAdaptor customAdaptor=new CustomAdaptor();
                             listView.setAdapter(customAdaptor);
 
                         }
@@ -195,7 +196,6 @@ public class Fragment_upanasyas extends Fragment {
             final ImageView audioStream=(ImageView)convertView.findViewById(R.id.audioStream);
 
 
-
             atitle.setText(title[position]);
             acontent.setText(content[position]);
 
@@ -238,11 +238,19 @@ public class Fragment_upanasyas extends Fragment {
             comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    SharedPreferences a=getActivity().getSharedPreferences(login_status, Context.MODE_PRIVATE);
+                    ls=a.getString("loginStatus","No");
+
+                    if (ls.equals("Yes")) {
                     comment.setVisibility(View.GONE);
                     commentView.setVisibility(View.VISIBLE);
                     typeComment.requestFocus();
                     comment.setVisibility(View.GONE);
                     commentView.setVisibility(View.VISIBLE);
+                    audioStream.setVisibility(View.INVISIBLE);
+                    }else {
+                        Toast.makeText(getContext(), "You have to login to comment on the post", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -251,8 +259,7 @@ public class Fragment_upanasyas extends Fragment {
                 public void onClick(View view) {
                     comment.setVisibility(View.VISIBLE);
                     commentView.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), "Posting comment...", Toast.LENGTH_SHORT).show();
-
+                    audioStream.setVisibility(View.INVISIBLE);
                     final String typecomments=typeComment.getText().toString().trim();
 
 
@@ -284,7 +291,7 @@ public class Fragment_upanasyas extends Fragment {
                             params.put("comment_name",comment_name);
                             params.put("comment_email",comment_email);
                             params.put("postid",id[position]);
-                            params.put("postcatagory","Upanyasas");
+                            params.put("postcatagory","Prashnauttaras");
 
                             return params;
                         }
@@ -296,8 +303,6 @@ public class Fragment_upanasyas extends Fragment {
 
                 }
             });
-
-
 
             return convertView;
         }
@@ -362,7 +367,6 @@ public class Fragment_upanasyas extends Fragment {
             progressDialog.setMessage("Buffering...");
             progressDialog.show();
         }
-
-
     }
+
 }
