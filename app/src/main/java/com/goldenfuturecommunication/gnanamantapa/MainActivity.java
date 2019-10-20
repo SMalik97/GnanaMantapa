@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
