@@ -106,4 +106,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/notytext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="15dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/notytitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textColor="#000000"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:fontFamily="sans-serif"/>
+        <TextView
+            android:id="@+id/notybody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textColor="#000000"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:layout_marginTop="10dp"
+           />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

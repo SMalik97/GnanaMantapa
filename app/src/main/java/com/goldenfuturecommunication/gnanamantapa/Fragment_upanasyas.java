@@ -3,6 +3,7 @@ package com.goldenfuturecommunication.gnanamantapa;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -54,10 +55,7 @@ public class Fragment_upanasyas extends Fragment {
     ProgressBar progressBar;
     String head;
 
-    private boolean playPause;
-    private MediaPlayer mediaPlayer;
-    private ProgressDialog progressDialog;
-    private boolean initialStage = true;
+
     String ls;
 
     String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
@@ -87,10 +85,7 @@ public class Fragment_upanasyas extends Fragment {
         new Thread(fa).start();
 
 
-        //initialize media player
-        mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        progressDialog = new ProgressDialog(getContext());
+
 
 
         return view;
@@ -205,28 +200,11 @@ public class Fragment_upanasyas extends Fragment {
             audioStream.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (!playPause) {
-                        audioStream.setImageResource(R.drawable.ic_pause_circle_outline_black_24dp);
-
-                        if (initialStage) {
-                            new Player().execute(audio[position]);
-                        } else {
-                            if (!mediaPlayer.isPlaying())
-                                mediaPlayer.start();
-                        }
-
-                        playPause = true;
-
-                    } else {
-                        audioStream.setImageResource(R.drawable.ic_play_arrow_black_24dp);
-
-
-                        if (mediaPlayer.isPlaying()) {
-                            mediaPlayer.pause();
-                        }
-
-                        playPause = false;
-                    }
+                    Intent i=new Intent(getContext(),audioPlay.class);
+                    i.putExtra("title",title[position]);
+                    i.putExtra("content",content[position]);
+                    i.putExtra("link",audio[position]);
+                    startActivity(i);
                 }
 
             });
@@ -313,66 +291,5 @@ public class Fragment_upanasyas extends Fragment {
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
 
-        if (mediaPlayer != null) {
-            mediaPlayer.reset();
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
-    }
-
-    class Player extends AsyncTask<String, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(String... strings) {
-            Boolean prepared = false;
-
-            try {
-                mediaPlayer.setDataSource(strings[0]);
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        initialStage = true;
-                        playPause = false;
-                        //show play icon
-                        mediaPlayer.stop();
-                        mediaPlayer.reset();
-                    }
-                });
-
-                mediaPlayer.prepare();
-                prepared = true;
-
-            } catch (Exception e) {
-
-                prepared = false;
-            }
-
-            return prepared;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-
-            if (progressDialog.isShowing()) {
-                progressDialog.dismiss();
-            }
-
-            mediaPlayer.start();
-            initialStage = false;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            progressDialog.setMessage("Buffering...");
-            progressDialog.show();
-        }
-
-
-    }
 }

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,8 @@ public class notification extends AppCompatActivity {
 
     ListView listView;
     List<ListDataNotification> list_data_noti;
+    LinearLayout notytext;
+    TextView notytitle,notybody;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +52,23 @@ public class notification extends AppCompatActivity {
 
         listView=(ListView)findViewById(R.id.listview);
 
-        fetchdata fd=new fetchdata();
-        new Thread(fd).start();
+//        fetchdata fd=new fetchdata();
+//        new Thread(fd).start();
+
+        notytext=(LinearLayout)findViewById(R.id.notytext);
+        notytitle=(TextView)findViewById(R.id.notytitle);
+        notybody=(TextView)findViewById(R.id.notybody);
+
+        String title=getIntent().getExtras().getString("title");
+        String body=getIntent().getExtras().getString("body");
+
+        notytitle.setText(title);
+        notybody.setText(body);
+        notytext.setVisibility(View.VISIBLE);
+        loadingView.setVisibility(View.GONE);
+        nonotificationView.setVisibility(View.GONE);
+
+
 
 
 
