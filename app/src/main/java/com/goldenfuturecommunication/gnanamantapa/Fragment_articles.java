@@ -59,6 +59,7 @@ public class Fragment_articles extends Fragment {
     ProgressBar progressBar;
     String head;
     String ls;
+    String language;
 
     public Fragment_articles() {
         // Required empty public constructor
@@ -70,6 +71,18 @@ public class Fragment_articles extends Fragment {
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_fragment_articles, container, false);
+
+
+
+        //check language
+        SharedPreferences b=getActivity().getSharedPreferences(language, Context.MODE_PRIVATE);
+        String l=b.getString("language","English");
+        if (l.equals("Kanada")){
+            url = "https://vp254.co.ke/vishwa/fetch_articles_kanada.php";
+        }
+
+
+
         head=getActivity().getIntent().getExtras().getString("head");
 
         progressBar=(ProgressBar)view.findViewById(R.id.progressBar);

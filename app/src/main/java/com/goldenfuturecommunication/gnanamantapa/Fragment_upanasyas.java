@@ -54,6 +54,7 @@ public class Fragment_upanasyas extends Fragment {
     ListView listView;
     ProgressBar progressBar;
     String head;
+    String language;
 
 
     String ls;
@@ -71,6 +72,15 @@ public class Fragment_upanasyas extends Fragment {
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_fragment_upanasyas, container, false);
+
+
+        //check language
+        SharedPreferences b=getActivity().getSharedPreferences(language, Context.MODE_PRIVATE);
+        String l=b.getString("language","English");
+        if (l.equals("Kanada")){
+            url = "https://vp254.co.ke/vishwa/fetch_upanasyas_kanada.php";
+        }
+
 
         head=getActivity().getIntent().getExtras().getString("head");
         //Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();

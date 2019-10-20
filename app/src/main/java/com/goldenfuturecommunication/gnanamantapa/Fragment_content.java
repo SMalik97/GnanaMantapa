@@ -1,6 +1,8 @@
 package com.goldenfuturecommunication.gnanamantapa;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -43,6 +45,7 @@ public class Fragment_content extends Fragment {
     int l;
     ListView listView;
     ProgressBar progressBar;
+    String language;
 
 
     public Fragment_content() {
@@ -54,6 +57,16 @@ public class Fragment_content extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view =inflater.inflate(R.layout.fragment_fragment_vishwanandini,container,false);
+
+        //check language
+        SharedPreferences b=getActivity().getSharedPreferences(language, Context.MODE_PRIVATE);
+        String l=b.getString("language","English");
+        if (l.equals("Kanada")){
+            url = "https://vp254.co.ke/vishwa/fetch_vishwa.php";
+        }
+
+
+
         progressBar=(ProgressBar)view.findViewById(R.id.progressBar);
         list_data_items=new ArrayList<>();
 

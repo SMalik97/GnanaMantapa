@@ -55,7 +55,7 @@ public class Fragment_prashnauttaras extends Fragment {
     String head;
     String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
     String login_status="No",login_name="No",login_email="No";
-    String ls;
+    String ls,language;
 
 
 
@@ -69,6 +69,15 @@ public class Fragment_prashnauttaras extends Fragment {
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_fragment_prashnauttaras, container, false);
+
+
+        //check language
+        SharedPreferences b=getActivity().getSharedPreferences(language, Context.MODE_PRIVATE);
+        String l=b.getString("language","English");
+        if (l.equals("Kanada")){
+            url = "https://vp254.co.ke/vishwa/fetch_prashnauttaras_kanada.php";
+        }
+
 
         head=getActivity().getIntent().getExtras().getString("head");
        // Toast.makeText(getContext(), ""+id, Toast.LENGTH_SHORT).show();

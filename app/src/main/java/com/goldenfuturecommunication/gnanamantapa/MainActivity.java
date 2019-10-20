@@ -1,6 +1,8 @@
 package com.goldenfuturecommunication.gnanamantapa;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TabLayout tablayout;
     ViewPager viewPager;
     PageAdapter pageAdapter;
+    String language="English";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +69,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pageAdapter=new PageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pageAdapter);
 
-        pageAdapter=new PageAdapter(getSupportFragmentManager());
-        pageAdapter.addFragments(new Fragment_content(),"ಉಪನ್ಯಾಸ");   //Contents
-        pageAdapter.addFragments(new Fragment_others(),"ವಿಶೇಷ ಮಾಹಿತಿ"); //Others
-        pageAdapter.addFragments(new Fragment_myaccount(),"ಲೇಖನಗಳು"); //My Account
+        //check language
+        SharedPreferences b=getSharedPreferences(language, Context.MODE_PRIVATE);
+        String l=b.getString("language","English");
+        if (l.equals("Kanada")){
+            pageAdapter=new PageAdapter(getSupportFragmentManager());
+            pageAdapter.addFragments(new Fragment_content(),"ಉಪನ್ಯಾಸ");   //Contents
+            pageAdapter.addFragments(new Fragment_others(),"ವಿಶೇಷ ಮಾಹಿತಿ"); //Others
+            pageAdapter.addFragments(new Fragment_myaccount(),"ಲೇಖನಗಳು"); //My Account
+        }else {
+            pageAdapter=new PageAdapter(getSupportFragmentManager());
+            pageAdapter.addFragments(new Fragment_content(),"Content");   //Contents
+            pageAdapter.addFragments(new Fragment_others(),"Others"); //Others
+            pageAdapter.addFragments(new Fragment_myaccount(),"My Account"); //My Account
+        }
 
 
         viewPager.setAdapter(pageAdapter);
@@ -103,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id=item.getItemId();
+
         if (id==R.id.action_refresh){
             Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(getApplicationContext(),MainActivity.class);
@@ -117,9 +131,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else if (id==R.id.action_language){
             if (item.getTitle().equals("English")) {
                 item.setTitle("Kannada");
+                SharedPreferences sp=getSharedPreferences(language, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sp.edit();
+                editor.putString("language","English");
+                editor.apply();
             }else {
                 item.setTitle("English");
+                SharedPreferences sp=getSharedPreferences(language, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sp.edit();
+                editor.putString("language","Kanada");
+                editor.apply();
             }
+            Intent i=new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(i);
+            overridePendingTransition(0,0);
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -149,5 +175,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return true;
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        //check language
+        SharedPreferences b=getSharedPreferences(language, Context.MODE_PRIVATE);
+        String l=b.getString("language","English");
+        if (l.equals("Kanada")){
+            menu.findItem(R.id.action_language).setTitle("English");
+        }else {
+            menu.findItem(R.id.action_language).setTitle("Kanada");
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+
+
 
 }

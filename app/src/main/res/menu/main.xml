@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_language"
-        android:title="English"
+        android:title="Kanada"
         app:showAsAction="always"
         />
 
