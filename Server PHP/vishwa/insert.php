@@ -4,8 +4,9 @@ $names = @$_POST['names'];
 $citys=@$_POST['citys'];
 $mobiles=@$_POST['mobiles'];
 $emails=@$_POST['emails'];
+$pass=@$_POST['pass'];
 
-$sql="INSERT INTO `user_registration`(`name`, `mobile`, `city`, `email`) VALUES ('$names','$mobiles','$citys','$emails');";
+$sql="INSERT INTO `user_registration`(`name`, `mobile`, `city`, `email`,`password`) VALUES ('$names','$mobiles','$citys','$emails','$pass');";
 
 $result=mysqli_query($con,$sql);
 
