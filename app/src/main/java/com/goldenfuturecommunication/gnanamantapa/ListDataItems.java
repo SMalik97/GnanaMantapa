@@ -2,15 +2,13 @@ package com.goldenfuturecommunication.gnanamantapa;
 
 public class ListDataItems {
 
-    String id,head,articles,upanasyas,prashnauttaras;
+    String id,cat,des;
 
-    public ListDataItems(String id,String head,String articles,String upanasyas,String prashnauttaras) {
+    public ListDataItems(String id,String cat,String des) {
 
         this.id=id;
-        this.head=head;
-        this.articles=articles;
-        this.upanasyas=upanasyas;
-        this.prashnauttaras=prashnauttaras;
+        this.cat=cat;
+        this.des=des;
 
     }
 
@@ -19,19 +17,13 @@ public class ListDataItems {
     public String getId() {
         return id;
     }
-    public String getHead() {
-        return head;
+    public String getCat() {
+        return cat;
+    }
+    public String getDes() {
+        return des;
     }
 
-    public String getArticles() {
-        return articles;
-    }
-    public String getUpanasyas() {
-        return upanasyas;
-    }
-    public String getPrashnauttaras() {
-        return prashnauttaras;
-    }
 
 
 }

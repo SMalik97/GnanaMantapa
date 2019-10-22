@@ -38,10 +38,9 @@ public class Fragment_content extends Fragment {
     String url = "https://vp254.co.ke/vishwa/fetch_vishwa.php";
     List<ListDataItems> list_data_items;
     String[] id;
-    String[] head;
-    String[] articles;
-    String[] upanasyas;
-    String[] prashnauttaras;
+    String[] cat;
+    String[] des;
+
     int l;
     ListView listView;
     ProgressBar progressBar;
@@ -102,8 +101,8 @@ public class Fragment_content extends Fragment {
             TextView title = (TextView) convertView.findViewById(R.id.title);
             TextView content=(TextView)convertView.findViewById(R.id.content);
 
-            title.setText(head[position]);
-            content.setText(articles[position]+" Articles, "+upanasyas[position]+" Upanyasas, "+prashnauttaras[position]+" Prashnottaras");
+            title.setText(cat[position]);
+            content.setText(des[position]);
 
 
             return convertView;
@@ -120,27 +119,24 @@ public class Fragment_content extends Fragment {
                         JSONObject jsonObject = new JSONObject(response);
                         JSONArray array = jsonObject.getJSONArray("data");
                         id=new String[array.length()];
-                        head=new String[array.length()];
-                        articles=new String[array.length()];
-                        upanasyas=new String[array.length()];
-                        prashnauttaras=new String[array.length()];
+                        cat=new String[array.length()];
+                        des=new String[array.length()];
+
                         for (int i = 0; i < array.length(); i++) {
                             JSONObject ob = array.getJSONObject(i);
                             ListDataItems listdataitems = new ListDataItems(
-                                    ob.getString("Id"),
-                                    ob.getString("head"),
-                                    ob.getString("articles"),
-                                    ob.getString("upanasyas"),
-                                    ob.getString("prashnauttaras"));
+                                    ob.getString("cid"),
+                                    ob.getString("CategoryName"),
+                                    ob.getString("Description"));
                             list_data_items.add(listdataitems);
 
                             l = i;
 
                             id[i] = listdataitems.getId();
-                            head[i] = listdataitems.getHead();
-                            articles[i] = listdataitems.getArticles();
-                            upanasyas[i] = listdataitems.getUpanasyas();
-                            prashnauttaras[i] = listdataitems.getPrashnauttaras();
+                            cat[i] = listdataitems.getCat();
+                            des[i] = listdataitems.getDes();
+
+
                         }
                         CustomAdaptor customAdaptor=new CustomAdaptor();
                         listView.setAdapter(customAdaptor);
@@ -152,7 +148,7 @@ public class Fragment_content extends Fragment {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                 Intent intent=new Intent(getContext(),vishwa_articles.class);
-                                intent.putExtra("head",head[i]);
+                                intent.putExtra("head",id[i]);
                                 startActivity(intent);
                             }
                         });
