@@ -3,7 +3,7 @@
     package="com.goldenfuturecommunication.gnanamantapa">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".audioPlay"></activity>
+        <activity android:name=".all_content_fetch"></activity>
+        <activity android:name=".audioPlay" />
         <activity android:name=".Commentposting" />
         <activity android:name=".notification" />
         <activity android:name=".report" />

@@ -16,19 +16,20 @@
             android:orientation="vertical"
             android:paddingBottom="100dp">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Panchanga"
-                android:background="@drawable/other_button"
-                android:textColor="#4161BC"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                />
+<!--            <Button-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="30dp"-->
+<!--                android:text="Panchanga"-->
+<!--                android:background="@drawable/other_button"-->
+<!--                android:textColor="#4161BC"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                />-->
 
             <Button
+                android:id="@+id/allarticles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -40,6 +41,7 @@
                 android:layout_marginRight="10dp"
                 />
             <Button
+                android:id="@+id/allupanyasas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -51,6 +53,7 @@
                 android:layout_marginRight="10dp"
                 />
             <Button
+                android:id="@+id/allprashnottara"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -62,6 +65,7 @@
                 android:layout_marginRight="10dp"
                 />
             <Button
+                android:id="@+id/rate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
