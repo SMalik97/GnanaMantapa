@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class askQuestion extends AppCompatActivity {
 
     LinearLayout askingme,askme;
     Button ask;
+    ProgressBar progressBar3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class askQuestion extends AppCompatActivity {
         ask_phone=(EditText)findViewById(R.id.ask_phone);
         ask_email=(EditText)findViewById(R.id.ask_email);
         ask_ques=(EditText)findViewById(R.id.ask_ques);
+
+        progressBar3=(ProgressBar)findViewById(R.id.progressBar3);
 
 
         SharedPreferences a=getSharedPreferences(login_status, Context.MODE_PRIVATE);
@@ -81,6 +85,7 @@ public class askQuestion extends AppCompatActivity {
 
                 backwork ob=new backwork();
                 new Thread(ob).start();
+                progressBar3.setVisibility(View.VISIBLE);
 
 
             }
@@ -100,14 +105,16 @@ public class askQuestion extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
 
-                    Toast.makeText(askQuestion.this, ""+response, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(askQuestion.this, "Your question is submitted!", Toast.LENGTH_SHORT).show();
+                    progressBar3.setVisibility(View.INVISIBLE);
 
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
 
-                    Toast.makeText(askQuestion.this, "Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(askQuestion.this, "Slow internet connection, please try again", Toast.LENGTH_SHORT).show();
+                    progressBar3.setVisibility(View.INVISIBLE);
 
                 }
             })

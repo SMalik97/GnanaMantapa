@@ -167,6 +167,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent=new Intent(getApplicationContext(),report.class);
             startActivity(intent);
         } else if (id == R.id.nav_shareapp) {
+            Intent p=new Intent(Intent.ACTION_SEND);
+            p.setType("text/plain");
+            p.putExtra(Intent.EXTRA_TEXT,"Download our app now from playstore. Click here "+"https://play.google.com/store/apps/details?id="+getPackageName());
+            startActivity(p);
 
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

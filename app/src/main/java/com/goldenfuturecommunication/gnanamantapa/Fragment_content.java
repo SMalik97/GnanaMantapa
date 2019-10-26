@@ -61,6 +61,8 @@ public class Fragment_content extends Fragment {
         SharedPreferences b=getActivity().getSharedPreferences(language, Context.MODE_PRIVATE);
         String l=b.getString("language","English");
         if (l.equals("Kanada")){
+            url = "https://vp254.co.ke/vishwa/fetch_vishwa_kanada.php";
+        }else {
             url = "https://vp254.co.ke/vishwa/fetch_vishwa.php";
         }
 
