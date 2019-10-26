@@ -54,7 +54,7 @@ public class Fragment_upanasyas extends Fragment {
     ListView listView;
     ProgressBar progressBar;
     String head;
-    String language;
+    String language="English";
 
 
     String ls;

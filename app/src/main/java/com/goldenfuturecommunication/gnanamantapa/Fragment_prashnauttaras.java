@@ -55,7 +55,7 @@ public class Fragment_prashnauttaras extends Fragment {
     String head;
     String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
     String login_status="No",login_name="No",login_email="No";
-    String ls,language;
+    String ls,language="English";
 
 
 

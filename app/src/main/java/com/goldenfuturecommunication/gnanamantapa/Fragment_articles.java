@@ -44,7 +44,7 @@ import java.util.Map;
 
 
 public class Fragment_articles extends Fragment {
-    String url = "https://vp254.co.ke/vishwa/fetch_articles.php";
+    String url;
 
     String comment_url="https://vp254.co.ke/vishwa/insert_comment.php";
     String login_status="No",login_name="No",login_email="No";
@@ -59,7 +59,7 @@ public class Fragment_articles extends Fragment {
     ProgressBar progressBar;
     String head;
     String ls;
-    String language;
+    String language="English";
 
     public Fragment_articles() {
         // Required empty public constructor
@@ -79,8 +79,9 @@ public class Fragment_articles extends Fragment {
         String l=b.getString("language","English");
         if (l.equals("Kanada")){
             url = "https://vp254.co.ke/vishwa/fetch_articles_kanada.php";
+        }else {
+            url = "https://vp254.co.ke/vishwa/fetch_articles.php";
         }
-
 
 
         head=getActivity().getIntent().getExtras().getString("head");
