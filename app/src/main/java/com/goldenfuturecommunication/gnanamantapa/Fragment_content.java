@@ -1,6 +1,8 @@
 package com.goldenfuturecommunication.gnanamantapa;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -44,7 +46,7 @@ public class Fragment_content extends Fragment {
     int l;
     ListView listView;
     ProgressBar progressBar;
-    String language;
+    String language="English";
 
 
     public Fragment_content() {
@@ -60,8 +62,19 @@ public class Fragment_content extends Fragment {
         //check language
         SharedPreferences b=getActivity().getSharedPreferences(language, Context.MODE_PRIVATE);
         String l=b.getString("language","English");
+
         if (l.equals("Kanada")){
             url = "https://vp254.co.ke/vishwa/fetch_vishwa_kanada.php";
+            AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+            builder.setTitle("No Content");
+            builder.setMessage("Sorry, We have no content in kanada language");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            builder.create().show();
         }else {
             url = "https://vp254.co.ke/vishwa/fetch_vishwa.php";
         }

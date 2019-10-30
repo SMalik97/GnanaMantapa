@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }else if (id==R.id.action_language){
             if (item.getTitle().equals("English")) {
-                item.setTitle("Kannada");
+                item.setTitle("Kanada");
                 SharedPreferences sp=getSharedPreferences(language, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=sp.edit();
                 editor.putString("language","English");
