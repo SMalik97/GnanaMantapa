@@ -1,7 +1,7 @@
 <?php
     $url = "https://fcm.googleapis.com/fcm/send";
     $token = "/topics/alluser";
-    $serverKey = 'AIzaSyD4X6J2In690uL67iOyz0jkJ2joq2FPpYE';
+    $serverKey = 'AIzaSyD4X6J2In690uL67iOyz0jkJ2joq2FPpYeE';
     $title =@$_POST['title'];
     $body=@$_POST['body'];
     
