@@ -77,6 +77,7 @@ public class Fragment_articles extends Fragment {
         //check language
         SharedPreferences b=getActivity().getSharedPreferences(language, Context.MODE_PRIVATE);
         String l=b.getString("language","English");
+       // Toast.makeText(getContext(), l+"", Toast.LENGTH_SHORT).show();
         if (l.equals("Kanada")){
             url = "https://vp254.co.ke/vishwa/fetch_articles_kanada.php";
         }else {

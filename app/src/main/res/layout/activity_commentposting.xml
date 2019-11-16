@@ -7,13 +7,9 @@
     tools:context=".Commentposting"
     android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
             <ListView
+                android:id="@+id/listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -23,8 +19,6 @@
 
             </ListView>
 
-        </LinearLayout>
 
-    </ScrollView>
 
 </LinearLayout>

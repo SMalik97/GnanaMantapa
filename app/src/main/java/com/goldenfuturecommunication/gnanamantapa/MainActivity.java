@@ -46,9 +46,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "No comment found!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
                 Intent i=new Intent(getApplicationContext(),Commentposting.class);
                 startActivity(i);
             }
@@ -187,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (l.equals("Kanada")){
             menu.findItem(R.id.action_language).setTitle("English");
         }else {
-            menu.findItem(R.id.action_language).setTitle("Kanada");
+            menu.findItem(R.id.action_language).setTitle("Kannada");
         }
         return super.onPrepareOptionsMenu(menu);
     }

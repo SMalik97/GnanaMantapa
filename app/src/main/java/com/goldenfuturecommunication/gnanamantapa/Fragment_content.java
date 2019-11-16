@@ -65,16 +65,7 @@ public class Fragment_content extends Fragment {
 
         if (l.equals("Kanada")){
             url = "https://vp254.co.ke/vishwa/fetch_vishwa_kanada.php";
-            AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
-            builder.setTitle("No Content");
-            builder.setMessage("Sorry, We have no content in kanada language");
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-            builder.create().show();
+
         }else {
             url = "https://vp254.co.ke/vishwa/fetch_vishwa.php";
         }
