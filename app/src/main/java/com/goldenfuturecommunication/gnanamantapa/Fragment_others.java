@@ -1,6 +1,8 @@
 package com.goldenfuturecommunication.gnanamantapa;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -14,7 +16,7 @@ import android.widget.Button;
 
 public class Fragment_others extends Fragment {
     Button allarticles,allupanyasas,allprashnottara,rate;
-
+    String language="English";
 
     public Fragment_others() {
         // Required empty public constructor
@@ -31,6 +33,16 @@ public class Fragment_others extends Fragment {
         allupanyasas=(Button)view.findViewById(R.id.allupanyasas);
         allprashnottara=(Button)view.findViewById(R.id.allprashnottara);
         rate=(Button)view.findViewById(R.id.rate);
+
+        SharedPreferences b=getActivity().getSharedPreferences(language, Context.MODE_PRIVATE);
+        String l=b.getString("language","English");
+        if (l.equals("Kanada")){
+            allarticles.setText("ಎಲ್ಲಾ ಲೇಖನಗಳು");
+            allupanyasas.setText("ಎಲ್ಲಾ ಉಪನ್ಯಾಸಗಳು");
+            allprashnottara.setText("ಎಲ್ಲ ಪ್ರಶ್ನೋತ್ತರ");
+            rate.setText("ದರ ಅಪ್ಲಿಕೇಶನ್");
+        }
+
 
         allarticles.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ViewPager viewPager;
     PageAdapter pageAdapter;
     String language="English";
+    String l;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
+
+
+
+
+
+        //check language
+        SharedPreferences b=getSharedPreferences(language, Context.MODE_PRIVATE);
+        l=b.getString("language","English");
+
+
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,6 +63,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(i);
             }
         });
+
+
+
+
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -57,6 +76,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        if (l.equals("Kanada")) {
+            Menu menu = navigationView.getMenu();
+            menu.findItem(R.id.nav_home).setTitle("ಮನೆ");
+            menu.findItem(R.id.nav_ask_a_ques).setTitle("ಪ್ರಶ್ನೆ ಕೇಳಿ");
+            menu.findItem(R.id.nav_about).setTitle("ಬಗ್ಗೆ");
+            menu.findItem(R.id.nav_report_app_issues).setTitle("ವರದಿ");
+            menu.findItem(R.id.nav_home).setTitle("ಅಪ್ಲಿಕೇಶನ್ ಹಂಚಿಕೊಳ್ಳಿ");
+            navigationView.setNavigationItemSelectedListener(this);
+        }
 
 
 
@@ -66,9 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pageAdapter=new PageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pageAdapter);
 
-        //check language
-        SharedPreferences b=getSharedPreferences(language, Context.MODE_PRIVATE);
-        String l=b.getString("language","English");
+
         if (l.equals("Kanada")){
             pageAdapter=new PageAdapter(getSupportFragmentManager());
             pageAdapter.addFragments(new Fragment_content(),"ಉಪನ್ಯಾಸ");   //Contents
